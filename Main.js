@@ -1,6 +1,6 @@
 //=====================================================================================    
 //=====================================================================================
-//                                  Smolbot.js
+//                                  simplebot.js
 // * Basic discord bot written in Javascript (Discord.js)
 // * @author: Albert471
 // * @version: 1.2.11
@@ -80,19 +80,19 @@ client.on(`message`, (receivedMessage) =>
   if (!Object.getOwnPropertyNames(serverObject).includes(receivedMessage.guild.id))
   {
     if (receivedMessage.author.id != receivedMessage.guild.ownerID && receivedMessage.author.id != `195767603476692992`&& receivedMessage.author.id != `520425039108243477`) return;
-    if (receivedMessage.content.search(/^smolbot initialize/i) > -1)
+    if (receivedMessage.content.search(/^simplebot initialize/i) > -1)
     {
-      onMessage.initializeSmolbot(receivedMessage);
+      onMessage.initializeSimplebot(receivedMessage);
     }
     //early return to ignore all other messages
     return;
   }
 
-  // functions only in bot channel (outputchannel) of allowed servers... (smolbot ____)
+  // functions only in bot channel (outputchannel) of allowed servers... (simplebot ____)
   if (receivedMessage.channel.id == serverObject[receivedMessage.guild.id].outputChannelId)
   {
     //display emotes (anyone)
-    if (receivedMessage.content.search(/^smolbot display emotes/i) > -1 )
+    if (receivedMessage.content.search(/^simplebot display emotes/i) > -1 )
     {
       onMessage.displayEmotes(receivedMessage);
       return;
@@ -100,7 +100,7 @@ client.on(`message`, (receivedMessage) =>
     //edit bot settings (ADMINS ONLY)
     if (serverObject[receivedMessage.guild.id].admins.includes(receivedMessage.author.id))
     {
-      if (receivedMessage.content.search(/^smolbot/i) > -1 )
+      if (receivedMessage.content.search(/^simplebot/i) > -1 )
       {
         onMessage.updateSettings(receivedMessage);
         return;
@@ -109,7 +109,7 @@ client.on(`message`, (receivedMessage) =>
     //edit bot settings for superadmins
     if (serverObject[receivedMessage.guild.id].superadmins.includes(receivedMessage.author.id))
     {
-      if (receivedMessage.content.search(/^smolbot/i) > -1 )
+      if (receivedMessage.content.search(/^simplebot/i) > -1 )
       {
         onMessage.updateSettings(receivedMessage);
         return;
@@ -417,7 +417,7 @@ const onReady =
 
     //stuff that makes the console look nice (might xport this to a log file later)
     console.log(`\n\n=-----------------------------------------------------------=`);
-    console.log(`\n                  Smolbot!`);
+    console.log(`\n                  Simplebot!`);
     console.log(`\n\n=-----------------------------------------------------------=`);
     console.log(`\nInformation will appear here when bot actions are triggered.`);
     console.log(`\n${getTimeStamp()}| Bot loaded successfully`);
@@ -427,8 +427,8 @@ const onReady =
 
 const onMessage = 
 {
-  //initializes the bot with smolbot initialize  _____, where the blanks are ids or names
-  initializeSmolbot(receivedMessage)
+  //initializes the bot with simplebot initialize  _____, where the blanks are ids or names
+  initializeSimplebot(receivedMessage)
   {
     // first try with channel ids
     if (receivedMessage.content.search(/[\d]+/g) > -1)
@@ -561,16 +561,16 @@ const onMessage =
           return;
       }
   },
-  //receives message `smolbot ____ ______`etc
+  //receives message `simplebot ____ ______`etc
   updateSettings(receivedMessage)
   {
-    if (receivedMessage.content.search(/^smolbot initialize/i) > -1)
+    if (receivedMessage.content.search(/^simplebot initialize/i) > -1)
     {
       globalReplyMessage = `Server has already been initialized!`;
       receivedMessage.channel.send(globalReplyMessage);
       return false;
     }
-    if (receivedMessage.content.search(/^smolbot toggle/i) > -1)
+    if (receivedMessage.content.search(/^simplebot toggle/i) > -1)
     {
       let updateSubstring = receivedMessage.content.substring(15);
       globalReplyMessage = ``;
@@ -579,7 +579,7 @@ const onMessage =
       return;
     }
     // add or remove admins
-    if (receivedMessage.content.search(/^smolbot admin/i) > -1)
+    if (receivedMessage.content.search(/^simplebot admin/i) > -1)
     {
       let updateSubstring = receivedMessage.content.substring(14);
       let addorRemoveBoolean = false;
@@ -598,7 +598,7 @@ const onMessage =
       }
       onMessage.updateAdmins(receivedMessage, updateSubstring, addorRemoveBoolean);
     }
-    if (receivedMessage.content.search(/^smolbot channel/i) > -1)
+    if (receivedMessage.content.search(/^simplebot channel/i) > -1)
     {
       // true = add, false = remove
       let addorRemoveBoolean = false;
@@ -619,11 +619,11 @@ const onMessage =
       }
       onMessage.updateChannels(receivedMessage, updateSubstring, addorRemoveBoolean);
     }
-    if (receivedMessage.content.search(/^smolbot change/i) > -1)
+    if (receivedMessage.content.search(/^simplebot change/i) > -1)
     {
       onMessage.changeStuff(receivedMessage);
     }
-    if (receivedMessage.content.search(/^smolbot current info/i) > -1)
+    if (receivedMessage.content.search(/^simplebot current info/i) > -1)
     {
       this.showSettings(receivedMessage);
       return true;
@@ -803,7 +803,7 @@ const onMessage =
     serverObject[receivedMessage.guild.id].markedArray.push(receivedMessage.id);
 
     //finally send the messages
-    globalReplyMessage += `\nI'm Smolbot`;
+    globalReplyMessage += `\nI'm Simplebot`;
     receivedMessage.channel.send(globalReplyMessage);
   },
 
@@ -940,7 +940,7 @@ const onMessage =
   },
   displayEmotes(receivedMessage)
   {
-    if (receivedMessage.content.search(/^smolbot display emotes/i) > -1)
+    if (receivedMessage.content.search(/^simplebot display emotes/i) > -1)
     {
       globalReplyMessage = `Available Emotes:\n`;
       for (let [key, value] of client.emojis) 
